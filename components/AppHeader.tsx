@@ -5,24 +5,25 @@ import {
   Text,
   Burger,
   SegmentedControl,
-  Menu
-} from '@mantine/core'
-import { Sun, Moon, ChevronDown } from 'tabler-icons-react'
-import Image from 'next/image'
-import { headerLinks } from '@/config/headerLinks'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+  Menu,
+} from "@mantine/core";
+import { Sun, Moon, ChevronDown } from "tabler-icons-react";
+import Image from "next/image";
+import { headerLinks } from "@/config/headerLinks";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Props = {
-  theme: ColorScheme
-  changeTheme: () => void
-  opened: boolean
-  changeOpened: () => void
-}
+  theme: ColorScheme;
+  changeTheme: () => void;
+  opened: boolean;
+  changeOpened: () => void;
+  logo: string;
+};
 
 const AppHeader = (props: Props) => {
-  const { theme, changeTheme, opened, changeOpened } = props
-  const router = useRouter()
+  const { theme, changeTheme, opened, changeOpened, logo } = props;
+  const router = useRouter();
   return (
     <Header
       height={64}
@@ -35,30 +36,28 @@ const AppHeader = (props: Props) => {
       />
       <div className="h-full flex items-center flex-1 cursor-pointer">
         <div
-          className="flex h-full items-center md:justify-start justify-center md:w-auto w-full"
-          onClick={() => router.push('/')}
+          className="flex h-full items-center md:justify-start pl-2 justify-center md:w-auto w-full"
+          onClick={() => router.push("/")}
         >
           <Image
             priority
-            src="/logo-dark.svg"
-            height={48}
-            width={48}
-            alt="logo of chunjun"
+            src={logo}
+            height={20}
+            width={60}
+            layout="fixed"
+            alt="凡米"
           />
-          <Text className="text-xl capitalize flex items-center font-nunito select-none">
-            Chunjun
-          </Text>
         </div>
         <div className="h-full justify-center flex-1 md:flex hidden items-center">
           {headerLinks.map((link) => {
-            if (link.path[0] === '/' && !Array.isArray(link.path)) {
+            if (link.path[0] === "/" && !Array.isArray(link.path)) {
               return (
                 <Link href={link.path} key={link.key}>
                   <a className="font-nunito inline-block md:w-[72px] text-center">
                     {link.name}
                   </a>
                 </Link>
-              )
+              );
             } else if (Array.isArray(link.path)) {
               return (
                 <Menu
@@ -84,11 +83,11 @@ const AppHeader = (props: Props) => {
                             <a className="uppercase">{url.name}示例</a>
                           </Link>
                         </Menu.Item>
-                      )
+                      );
                     })}
                   </Menu.Dropdown>
                 </Menu>
-              )
+              );
             } else {
               return (
                 <a
@@ -99,29 +98,28 @@ const AppHeader = (props: Props) => {
                 >
                   {link.name}
                 </a>
-              )
+              );
             }
           })}
         </div>
       </div>
-
       <div className="h-full flex items-center space-x-4 pr-[9px]">
-        <SegmentedControl
+        {/* <SegmentedControl
           data={[
             { label: '简体中文', value: 'zh-Hans' },
             { label: 'English', value: 'en' }
           ]}
-        />
+        /> */}
         <ActionIcon
           variant="outline"
-          color={theme === 'dark' ? 'yellow' : 'blue'}
+          color={theme === "dark" ? "yellow" : "blue"}
           onClick={changeTheme}
         >
-          {theme === 'light' ? <Sun /> : <Moon />}
+          {theme === "light" ? <Sun /> : <Moon />}
         </ActionIcon>
       </div>
     </Header>
-  )
-}
+  );
+};
 
-export default AppHeader
+export default AppHeader;

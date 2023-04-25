@@ -1,47 +1,44 @@
-import { Drawer, ActionIcon, Text } from '@mantine/core'
-import Link from 'next/link'
+import { Drawer, ActionIcon, Text } from "@mantine/core";
+import Link from "next/link";
 import {
   Download,
   Signature,
   Code,
   Database,
   Tool,
-  Heart
-} from 'tabler-icons-react'
-import Image from 'next/image'
-import logo from '@/public/logo-dark.svg'
+  Heart,
+} from "tabler-icons-react";
+import Image from "next/image";
 
 type Props = {
-  opened: boolean
-  changeOpened: () => void
-}
+  opened: boolean;
+  changeOpened: () => void;
+  logo: string;
+};
 
-const SEP = process.env.sep as string
+const SEP = process.env.sep as string;
 
 // TODO:同步header的链接
 
 const AppNavbar = (props: Props) => {
-  const { opened, changeOpened } = props
+  const { opened, changeOpened, logo } = props;
   return (
     <Drawer
-      overlayColor={'transparent'}
+      overlayColor={"transparent"}
       padding="md"
       opened={opened}
       onClose={changeOpened}
     >
       <div className=" flex items-center mb-4">
-        <Image
-          priority
-          src={logo}
-          height={36}
-          width={36}
-          alt="logo of chunjun"
-        ></Image>
-        <Text className="text-xl font-bold capitalize flex items-center font-mono">
-          Chunjun
-        </Text>
+        <Image priority src={logo} height={30} width={90} alt="凡米"></Image>
       </div>
       <div className="h-[36px] flex items-center p-md cursor-pointer">
+        <Link href={"/info"}>
+          <a className="font-mono">公司信息</a>
+        </Link>
+      </div>
+
+      {/* <div className="h-[36px] flex items-center p-md cursor-pointer">
         <ActionIcon variant="light" color="violet" className="mx-2">
           <Signature />
         </ActionIcon>
@@ -93,9 +90,9 @@ const AppNavbar = (props: Props) => {
         <Link href={'/contributor'}>
           <a className="font-mono">贡献者</a>
         </Link>
-      </div>
+      </div> */}
     </Drawer>
-  )
-}
+  );
+};
 
-export default AppNavbar
+export default AppNavbar;
