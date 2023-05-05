@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         withNormalizeCSS
       >
         <Head>
-          <title>{titleInfo.title}</title>
+          <title>{titleInfo?.title}</title>
           <meta name="description" content="凡米科技" />
           <link rel="shortcut icon" href="" />
         </Head>
